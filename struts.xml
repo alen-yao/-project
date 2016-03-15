@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />  
+          
+	 <package name="login" namespace="/" extends="struts-default">
+	        <action name="login_*" class="com.mism.action.LoginAction" method="{1}">
+	        	<result name="main_view">/index.jsp</result>
+	        	<result name="error">/login.jsp</result>
+	        	<result name="input">/index.jsp</result> 
+	        	<result name="login_view">/login.jsp</result>
+	          
+	        </action>  
+	 </package>
+	 
+	 <package name="product" namespace="/" extends="struts-default">
+	        <action name="product_*" class="com.mism.action.ProductAction" method="{1}">
+	        	<result name="product_query_view">/product_manage.jsp</result>
+	        	<result name="reg_view">/product_reg.jsp</result>
+	        	<result name="createProduct_error">/product_reg.jsp</result>
+	        	<result name="input">/index.jsp</result> 
+	        	<result name="success_view" type="redirectAction">product_productQuery.action</result>
+	        </action>  
+	 </package>
+	 
+	 <package name="inventory" namespace="/" extends="struts-default">
+	        <action name="inventory_*" class="com.mism.action.InventoryAction" method="{1}">
+	        	<result name="inventory_query_view">/inventory_query.jsp</result>
+	        	<result name="sell_manage_view">/sell_manage.jsp</result>
+	        	<result name="error">/error.jsp</result>
+	        	<result name="input">/index.jsp</result> 
+	        	<result name="success_view" type="redirectAction">product_productQuery.action</result>
+	        	<result name="createInventory_error">/product_manage.jsp</result>
+	        </action>  
+	 </package>
+	 
+	 <package name="order" namespace="/" extends="struts-default">
+	        <action name="order_*" class="com.mism.action.OrderAction" method="{1}">
+	        	<result name="error">/error.jsp</result>
+	        	<result name="input">/index.jsp</result> 
+	        	<result name="order_query_view">/sell_query.jsp</result> 
+	        	<result name="refund_query_view">/refund_query.jsp</result>
+	        	<result name="success_view" type="redirectAction">inventory_sellQuery.action</result>
+	        	<result name="createOrder_error">/sell_manage.jsp</result>
+	        	<result name="rejectOrder_error">/sell_manage.jsp</result>
+	        </action>  
+	 </package>
+	 
+	 <package name="model" namespace="/" extends="struts-default">
+	        <action name="model_*" class="com.mism.action.ModelAction" method="{1}">
+	        	<result name="model_query_view">/model_manage.jsp</result>
+	        	<result name="error">/error.jsp</result>
+	        	<result name="input">/index.jsp</result> 
+	        	<result name="create_success" type="redirectAction">model_modelQuery.action</result>
+	        	<result name="create_failed">/model_manage.jsp</result>
+	        </action>  
+	 </package>
+	 
+	 <package name="standard" namespace="/" extends="struts-default">
+	        <action name="standard_*" class="com.mism.action.StandardAction" method="{1}">
+	        	<result name="standard_query_view">/standard_manage.jsp</result>
+	        	<result name="error">/error.jsp</result>
+	        	<result name="input">/index.jsp</result> 
+	        	<result name="create_success" type="redirectAction">standard_standardQuery.action</result>
+	        	<result name="create_failed">/standard_manage.jsp</result>
+	        </action>  
+	 </package>
+	 
+	 <package name="unit" namespace="/" extends="struts-default">
+	        <action name="unit_*" class="com.mism.action.UnitAction" method="{1}">
+	        	<result name="unit_query_view">/unit_manage.jsp</result>
+	        	<result name="error">/error.jsp</result>
+	        	<result name="input">/index.jsp</result> 
+	        	<result name="create_success" type="redirectAction">unit_unitQuery.action</result>
+	        	<result name="create_failed">/unit_manage.jsp</result>
+	        </action>  
+	 </package>	 
+
+ 	 <package name="password" namespace="/password" extends="struts-default">
+	        <action name="password_*" class="com.mism.action.PasswordAction" method="{1}">  
+	        	<result name="change_success">/message.jsp</result>
+	        	<result name="error">/error.jsp</result> 
+	        </action>  
+	 </package> 
+	  
+	 <package name="user" namespace="/" extends="struts-default">
+	        <action name="user_*" class="com.mism.action.UserAction" method="{1}">  
+	        	<result name="user_query_view">/account_manage.jsp</result>
+	        	<result name="user_create_view">/account_reg.jsp</result>
+	        	<result name="success" type="redirectAction">user_userQuery.action</result>
+	        	<result name="error">/account_reg.jsp</result> 
+	        	<result name="updatepwd_error">/pwd_update.jsp</result>
+	        </action>  
+	 </package>  
+	 
+	 <package name="ajax" extends="json-default"  namespace="/">
+	        <action name="ajax_*" class="com.mism.action.AjaxAction" method="{1}">  
+	        	<result type="json" name="success">  
+	                <param name="root">result</param>  
+            	</result>  
+	        </action>  
+	 </package> 
+</struts>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/mysql"/>
+		<property name="username" value="root"/>
+		<property name="password" value="0220"/>
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		 <property name="mappingResources">
+			    <list>
+				    <value>com/mism/entity/MismAdmin.hbm.xml</value>
+					<value>com/mism/entity/MismModel.hbm.xml</value>
+					<value>com/mism/entity/MismStandard.hbm.xml</value>
+					<value>com/mism/entity/MismUnit.hbm.xml</value>
+					<value>com/mism/entity/MismProduct.hbm.xml</value>
+					<value>com/mism/entity/MismInventory.hbm.xml</value>
+					<value>com/mism/entity/MismOrder.hbm.xml</value>
+			    </list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="superDao" class="com.mism.dao.impl.SuperDaoImpl">
+		<property name="superSessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="mismAdminDao" class="com.mism.dao.impl.MismAdminDaoImpl">
+		<property name="osessionFactory" ref="sessionFactory"></property>
+
+	</bean>
+
+	<bean id="mismAdminService" class="com.mism.service.impl.MismAdminServiceImpl">
+		<property name="mismAdminDao" ref="mismAdminDao"></property>
+	</bean>
+	
+	<bean id="mismStandardDao" class="com.mism.dao.impl.MismStandardDaoImpl">
+		<property name="osessionFactory" ref="sessionFactory"></property>
+
+	</bean>
+
+	<bean id="mismStandardService" class="com.mism.service.impl.MismStandardServiceImpl">
+		<property name="mismStandardDao" ref="mismStandardDao"></property>
+	</bean>
+	
+	<bean id="mismModelDao" class="com.mism.dao.impl.MismModelDaoImpl">
+		<property name="osessionFactory" ref="sessionFactory"></property>
+
+	</bean>
+
+	<bean id="mismModelService" class="com.mism.service.impl.MismModelServiceImpl">
+		<property name="mismModelDao" ref="mismModelDao"></property>
+	</bean>
+	
+	<bean id="mismUnitDao" class="com.mism.dao.impl.MismUnitDaoImpl">
+		<property name="osessionFactory" ref="sessionFactory"></property>
+
+	</bean>
+
+	<bean id="mismUnitService" class="com.mism.service.impl.MismUnitServiceImpl">
+		<property name="mismUnitDao" ref="mismUnitDao"></property>
+	</bean>
+	
+	<bean id="mismProductDao" class="com.mism.dao.impl.MismProductDaoImpl">
+		<property name="osessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="mismProductService" class="com.mism.service.impl.MismProductServiceImpl">
+		<property name="mismProductDao" ref="mismProductDao"></property>
+	</bean>
+	
+	<bean id="mismInventoryDao" class="com.mism.dao.impl.MismInventoryDaoImpl">
+		<property name="osessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="mismInventoryService" class="com.mism.service.impl.MismInventoryServiceImpl">
+		<property name="mismInventoryDao" ref="mismInventoryDao"></property>
+	</bean>
+	
+	<bean id="mismOrderDao" class="com.mism.dao.impl.MismOrderDaoImpl">
+		<property name="osessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="mismOrderService" class="com.mism.service.impl.MismOrderServiceImpl">
+		<property name="mismOrderDao" ref="mismOrderDao"></property>
+	</bean>
+</beans>
